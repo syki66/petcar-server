@@ -1,17 +1,68 @@
 import RPi.GPIO as gpio
 import time
 
-gpio.setmode(gpio.BOARD)
+def init():
+    gpio.setmode(gpio.BOARD)
+    gpio.setup(7, gpio.OUT)
+    gpio.setup(11, gpio.OUT)
+    gpio.setup(13, gpio.OUT)
+    gpio.setup(15, gpio.OUT)
 
-gpio.setup(7, gpio.OUT)
-gpio.setup(11, gpio.OUT)
-gpio.setup(13, gpio.OUT)
-gpio.setup(15, gpio.OUT)
+def forward(tf):
+    init()
+    gpio.output(7, True)
+    gpio.output(11, False)
+    gpio.output(15, True)
+    gpio.output(13, False)
+    time.sleep(tf)
+    gpio.cleanup()
 
-gpio.output(7, True)
-gpio.output(11, False)
-gpio.output(15, True)
-gpio.output(13, False)
-time.sleep(0.5)
+def reverse(tf):
+    init()
+    gpio.output(7, False)
+    gpio.output(11, True)
+    gpio.output(15, False)
+    gpio.output(13, True)
+    time.sleep(tf)
+    gpio.cleanup()
 
-gpio.cleanup()
+def turn_left(tf):
+    init()
+    gpio.output(7, True)
+    gpio.output(11, False)
+    gpio.output(15, True)
+    gpio.output(13, True)
+    time.sleep(tf)
+    gpio.cleanup()
+
+def turn_right(tf):
+    init()
+    gpio.output(7, True)
+    gpio.output(11, True)
+    gpio.output(15, True)
+    gpio.output(13, False)
+    time.sleep(tf)
+    gpio.cleanup()
+
+def pivot_right(tf):
+    init()
+    gpio.output(7, False)
+    gpio.output(11, True)
+    gpio.output(15, True)
+    gpio.output(13, False)
+    time.sleep(tf)
+    gpio.cleanup()
+
+def pivot_left(tf):
+    init()
+    gpio.output(7, True)
+    gpio.output(11, False)
+    gpio.output(15, False)
+    gpio.output(13, True)
+    time.sleep(tf)
+    gpio.cleanup()
+
+forward(4)
+reverse(4)
+turn_right(4)
+pivot_left(4)
