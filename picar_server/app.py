@@ -57,37 +57,26 @@ def pivot_left(tf):
     time.sleep(tf)
     gpio.cleanup()
 
+t = 0.1
+
+directions = [forward, reverse, turn_left, turn_right, pivot_left, pivot_right]
 
 
 app = Flask(__name__)
 
 
-#rendering the HTML page which has the button
-@app.route('/json')
-def json():
-    return render_template('json.html')
-
-#background process happening without any refreshing
-@app.route('/background_process_test')
-def background_process_test():
-    print ("Hello")
-    return ("nothing")
 
 
+@app.route('/dc_motor/<int:id>')
+def move(id):
+	init()
+	directions[id](t)
 
-
-
-
-
-# @app.route('/test')
-# def test():
-# 	init()
-# 	forward(1)
-# 	return render_template('test.html')
+	return render_template('test.html')
 
 @app.route('/')
 def hello():
 	return "helloworld"
 
 if __name__ == "__main__":
-	app.run(host="0.0.0.0", port="8080", debug=True)
+	app.run(host="0.0.0.0", port="80", debug=True)
