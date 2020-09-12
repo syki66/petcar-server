@@ -1,7 +1,7 @@
 import RPi.GPIO as gpio
 import time
 import sys
-from pynput import keyboard
+from Tkinter import *
 
 def init():
     gpio.setmode(gpio.BOARD)
@@ -65,37 +65,30 @@ def key_input(event):
     sleep_time = 0.03
      
     if key_press.lower() == 'w':
-	forward(sleep_time)
+	    forward(sleep_time)
     elif key_press.lower() == 's':
-	reverse(sleep_time)
+	    reverse(sleep_time)
     elif key_press.lower() == 'a':
-	turn_left(sleep_time)
+	    turn_left(sleep_time)
     elif key_press.lower() == 'd':
-	turn_right(sleep_time)
+	    turn_right(sleep_time)
     elif key_press.lower() == 'q':
-	pivot_left(sleep_time)
+	    pivot_left(sleep_time)
     elif key_press.lower() == 'e':
-	pivot_right(sleep_time)
+	    pivot_right(sleep_time)
     else:
-	pass
+	    pass
 
-'''
+
 command = Tk()
 command.bind('<KeyPress>', key_input)
 command.mainloop()
-'''
+
+
+
+
 
 '''
-
-	init()
-	forward(1)
-	init()
-	reverse(1)
-	init()
-	pivot_right(1)
-'''
-
-
 def on_press(key):
     try:
 	init()
@@ -140,3 +133,4 @@ listener = keyboard.Listener(
     on_press=on_press,
     on_release=on_release)
 listener.start()
+'''

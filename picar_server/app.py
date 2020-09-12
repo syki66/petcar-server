@@ -58,17 +58,36 @@ def pivot_left(tf):
     gpio.cleanup()
 
 
+
 app = Flask(__name__)
 
-@app.route('/test')
-def test():
-	init()
-	forward(1)
-	return render_template('test.html')
+
+#rendering the HTML page which has the button
+@app.route('/json')
+def json():
+    return render_template('json.html')
+
+#background process happening without any refreshing
+@app.route('/background_process_test')
+def background_process_test():
+    print ("Hello")
+    return ("nothing")
+
+
+
+
+
+
+
+# @app.route('/test')
+# def test():
+# 	init()
+# 	forward(1)
+# 	return render_template('test.html')
 
 @app.route('/')
 def hello():
 	return "helloworld"
 
 if __name__ == "__main__":
-	app.run(host="0.0.0.0", port="80", debug=True)
+	app.run(host="0.0.0.0", port="8080", debug=True)
