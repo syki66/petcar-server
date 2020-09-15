@@ -1,8 +1,50 @@
 <html>
   <head>
     <title>control center</title>
+
   </head>
   <body>
-    <div>control center</div>
+    <h1>Control Center</h1>
+
+    <h3>Camera</h3>
+
+    <div>
+      <img src="{{ url_for('video_feed') }}" width="50%">
+    </div>
+
+    <h3>DC motor control</h3>
+
+    <div>
+      <button onclick="fetchUrl(0)">forward</button>
+      <button onclick="fetchUrl(1)">backward</button>
+      <button onclick="fetchUrl(2)">left</button>
+      <button onclick="fetchUrl(3)">right</button>
+      <button onclick="fetchUrl(4)">CCW</button>
+      <button onclick="fetchUrl(5)">CW</button>
+    </div>
   </body>
+
+  <script>
+    let thisUrl = window.location.href;
+    console.log(thisUrl)
+/*
+
+    var ul = document.querySelector(".dc_motor");
+
+    var a = document.createElement("a");
+    a.innerHTML = "forward";
+    a.href = `${thisUrl}dc_motor/1`;
+
+    var li = document.createElement("li");
+    li.appendChild(a);
+    ul.appendChild(li);
+*/
+
+
+    function fetchUrl(direction){
+      fetch(`${thisUrl}dc_motor/${direction}`)
+    }
+
+
+  </script>
 </html>
