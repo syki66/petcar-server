@@ -45,14 +45,14 @@
       fetch(`${thisUrl}dc_motor/${direction}`)
     }
 
-
+    
     
 
     // use GET (because of delay)
     function httpGet(url)
     {
       var xmlHttp = new XMLHttpRequest();
-      xmlHttp.open( "GET", url, false ); // false for synchronous request
+      xmlHttp.open( "GET", url); // false for synchronous request
       xmlHttp.send( null );
       return xmlHttp.responseText;
     }

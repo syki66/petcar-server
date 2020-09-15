@@ -17,7 +17,7 @@ def index():
 @app.route('/dc_motor/<int:id>')
 def move(id):
     """DC motor control page"""
-    t = 0.1
+    t = 0.03
     directions = [forward, reverse, turn_left, turn_right, pivot_left, pivot_right]
     directions[id](t)
     return render_template('dc_motor.html')
@@ -41,4 +41,4 @@ def gen(camera):
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port =80, debug=True, threaded=True)
+    app.run(host='0.0.0.0', port =8080, debug=True, threaded=True)
