@@ -4,9 +4,7 @@ from flask import Flask, render_template, Response
 from camera_pi import Camera
 from dc_motor import *
 
-
-
-
+t = 0.05 # httpget interval speed when motor enabled.
 
 app = Flask(__name__)
 
@@ -17,7 +15,6 @@ def index():
 @app.route('/dc_motor/<int:id>')
 def move(id):
     """DC motor control page"""
-    t = 0.03
     directions = [forward, reverse, turn_left, turn_right, pivot_left, pivot_right]
     directions[id](t)
     return render_template('dc_motor.html')
