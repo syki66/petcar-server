@@ -2,9 +2,10 @@ import RPi.GPIO as gpio
 import time
 from flask import Flask, render_template, Response
 from camera_pi import Camera
-from dc_motor import *
+from dc_motor import DCMotor
 
-t = 0.1 # httpget interval speed when motor enabled.
+DC = DCMotor((7, 11, 13, 15), 0.1) # gpio pins, time.sleep(ms)
+
 
 app = Flask(__name__)
 
@@ -15,15 +16,8 @@ def index():
 @app.route('/dc_motor/<int:id>')
 def move(id):
     """DC motor control page"""
-    directions = [forward, reverse, turn_left, turn_right, pivot_left, pivot_right]
-    directions[id](t)
-    return render_template('dc_motor.html')
-
-@app.route('/dc_motor_full_power/<int:id>')
-def move(id):
-    """DC motor control page"""
-    directions = [forward, reverse, turn_left, turn_right, pivot_left, pivot_right]
-    directions[id](t)
+    directions = [DC.forward, DC.reverse, DC.turn_left, DC.turn_right, DC.pivot_left, DC.pivot_right]
+    directions[id]()
     return render_template('dc_motor.html')
 
 @app.route('/camera')
