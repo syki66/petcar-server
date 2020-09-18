@@ -1,65 +1,69 @@
 import RPi.GPIO as gpio
 import time
 
-pins = (7, 11, 13, 15)
+#pins = (7, 11, 13, 15)
 
-def init():
-    gpio.setmode(gpio.BOARD)
-    gpio.setup(pins[0], gpio.OUT)
-    gpio.setup(pins[1], gpio.OUT)
-    gpio.setup(pins[2], gpio.OUT)
-    gpio.setup(pins[3], gpio.OUT)
+class DCMotor:
+    def __init__(self, pins):
+        self.pins = pins
 
-def forward(tf):
-    init()
-    gpio.output(pins[0], True)
-    gpio.output(pins[1], False)
-    gpio.output(pins[3], True)
-    gpio.output(pins[2], False)
-    time.sleep(tf)
-    gpio.cleanup()
+    def initialize_gpio(self):
+        gpio.setmode(gpio.BOARD)
+        gpio.setup(self.pins[0], gpio.OUT)
+        gpio.setup(self.pins[1], gpio.OUT)
+        gpio.setup(self.pins[2], gpio.OUT)
+        gpio.setup(self.pins[3], gpio.OUT)
 
-def reverse(tf):
-    init()
-    gpio.output(pins[0], False)
-    gpio.output(pins[1], True)
-    gpio.output(pins[3], False)
-    gpio.output(pins[2], True)
-    time.sleep(tf)
-    gpio.cleanup()
+    def forward(self):
+        self.initialize_gpio()
+        gpio.output(self.pins[0], True)
+        gpio.output(self.pins[1], False)
+        gpio.output(self.pins[3], True)
+        gpio.output(self.pins[2], False)
+        gpio.cleanup()
 
-def turn_left(tf):
-    init()
-    gpio.output(pins[0], True)
-    gpio.output(pins[1], False)
-    gpio.output(pins[3], True)
-    gpio.output(pins[2], True)
-    time.sleep(tf)
-    gpio.cleanup()
+    def reverse(self):
+        self.initialize_gpio()
+        gpio.output(self.pins[0], False)
+        gpio.output(self.pins[1], True)
+        gpio.output(self.pins[3], False)
+        gpio.output(self.pins[2], True)
+        gpio.cleanup()
 
-def turn_right(tf):
-    init()
-    gpio.output(pins[0], True)
-    gpio.output(pins[1], True)
-    gpio.output(pins[3], True)
-    gpio.output(pins[2], False)
-    time.sleep(tf)
-    gpio.cleanup()
+    def turn_left(self):
+        self.initialize_gpio()
+        gpio.output(self.pins[0], True)
+        gpio.output(self.pins[1], False)
+        gpio.output(self.pins[3], True)
+        gpio.output(self.pins[2], True)
+        gpio.cleanup()
 
-def pivot_right(tf):
-    init()
-    gpio.output(pins[0], False)
-    gpio.output(pins[1], True)
-    gpio.output(pins[3], True)
-    gpio.output(pins[2], False)
-    time.sleep(tf)
-    gpio.cleanup()
+    def turn_right(self):
+        self.initialize_gpio()
+        gpio.output(self.pins[0], True)
+        gpio.output(self.pins[1], True)
+        gpio.output(self.pins[3], True)
+        gpio.output(self.pins[2], False)
+        gpio.cleanup()
 
-def pivot_left(tf):
-    init()
-    gpio.output(pins[0], True)
-    gpio.output(pins[1], False)
-    gpio.output(pins[3], False)
-    gpio.output(pins[2], True)
-    time.sleep(tf)
-    gpio.cleanup()
+    def pivot_right(self):
+        self.initialize_gpio()
+        gpio.output(self.pins[0], False)
+        gpio.output(self.pins[1], True)
+        gpio.output(self.pins[3], True)
+        gpio.output(self.pins[2], False)
+        time.sleep(1)
+        gpio.cleanup()
+
+    def pivot_left(self):
+        self.initialize_gpio()
+        gpio.output(self.pins[0], True)
+        gpio.output(self.pins[1], False)
+        gpio.output(self.pins[3], False)
+        gpio.output(self.pins[2], True)
+        gpio.cleanup()
+
+
+test = DCMotor((7, 11, 13, 15))
+
+test.pivot_right()
