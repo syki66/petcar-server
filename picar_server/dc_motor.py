@@ -95,3 +95,7 @@ class DCMotorInterval(DCMotor):
         super().pivot_left()
         time.sleep(self.sleep_t)
         gpio.cleanup()
+
+stop_motor = DCMotor((7, 11, 13, 15))
+
+stop_motor.cleanup_gpio()
