@@ -6,6 +6,10 @@
   <body>
     <h1>Control Center</h1>
 
+    <h3>HOST IP PORT ADDRESS</h3>
+
+    <div class="hostIpPort"></div>
+
     <h3>Camera</h3>
 
     <div>
@@ -39,6 +43,10 @@
   <script>
     let thisUrl = window.location.href;
     console.log(thisUrl)
+
+    const hostAddress = document.querySelector(".hostIpPort");
+    hostAddress.innerHTML = thisUrl;
+
 /*
 
     var ul = document.querySelector(".dc_motor");
