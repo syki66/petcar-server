@@ -4,10 +4,11 @@ from flask import Flask, render_template, Response
 from camera_pi import Camera
 from dc_motor import DCMotorInterval
 from dc_motor import DCMotor
+from servo_motor import servoMotor
 
 DC = DCMotor((7, 11, 13, 15)) # gpio pins
 DCInterval = DCMotorInterval((7, 11, 13, 15), 0.1) # gpio pins, time.sleep(ms)
-
+SERVOPIN = 16 # servo_motor_gpio_pins
 
 app = Flask(__name__)
 
@@ -46,6 +47,14 @@ def gen(camera):
         frame = camera.get_frame()
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
+@app.route('/servo_motor_on')
+def servo_on():
+    servoMotor(SERVOPIN, "on") # servo_motor_gpio_pins
+
+@app.route('/servo_motor_off')
+def servo_off():
+    servoMotor(SERVOPIN, "off") # servo_motor_gpio_pins
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port =8080, debug=True, threaded=True)
