@@ -5,10 +5,12 @@ from camera_pi import Camera
 from dc_motor import DCMotorInterval
 from dc_motor import DCMotor
 from servo_motor import servoMotor
+from led import led
 
 DC = DCMotor((7, 11, 13, 15)) # gpio pins
 DCInterval = DCMotorInterval((7, 11, 13, 15), 0.1) # gpio pins, time.sleep(ms)
 SERVOPIN = 16 # servo_motor_gpio_pins
+LEDPIN = 18
 
 app = Flask(__name__)
 
@@ -50,11 +52,23 @@ def gen(camera):
 
 @app.route('/servo_motor_on')
 def servo_on():
-    servoMotor(SERVOPIN, "on") # servo_motor_gpio_pins
+    servoMotor(SERVOPIN, "on")
+    return render_template('servo_on.html')
 
 @app.route('/servo_motor_off')
 def servo_off():
-    servoMotor(SERVOPIN, "off") # servo_motor_gpio_pins
+    servoMotor(SERVOPIN, "off")
+    return render_template('servo_off.html')
+
+@app.route('/led_on')
+def led_on():
+    led(LEDPIN, True)
+    return render_template('led_on.html')
+
+@app.route('/led_off')
+def led_off():
+    led(LEDPIN, False)
+    return render_template('led_off.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port =8080, debug=True, threaded=True)
