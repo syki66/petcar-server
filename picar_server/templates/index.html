@@ -48,11 +48,15 @@
 
     <h3>LED control</h3>
 
-    <div class="led">LED status</div>
-
     <div>
-      <button onclick="httpGetAndStatus(thisUrl, 'led_on')">LED ON</button>
-      <button onclick="httpGetAndStatus(thisUrl, 'led_off')">LED OFF</button>
+      <button onclick="httpGet(`${thisUrl}led_on/0`)">LED ON 1</button>
+      <button onclick="httpGet(`${thisUrl}led_on/1`)">LED ON 2</button>
+      <button onclick="httpGet(`${thisUrl}led_on/2`)">LED ON 3</button>
+      <button onclick="httpGet(`${thisUrl}led_on/3`)">LED ON 4</button>
+      <button onclick="httpGet(`${thisUrl}led_on/4`)">LED ON 5</button>
+      <button onclick="httpGet(`${thisUrl}led_on/5`)">LED ON 6</button>
+      <button onclick="httpGet(`${thisUrl}led_on/6`)">LED ON 7</button>
+      <button onclick="httpGet(`${thisUrl}led_off`)">LED OFF</button>
     </div>
   </body>
 
@@ -91,12 +95,6 @@
       xmlHttp.open( "GET", url); // false for synchronous request
       xmlHttp.send( null );
       return xmlHttp.responseText;
-    }
-
-    function httpGetAndStatus(url, status){
-      httpGet(`${thisUrl}${status}`);
-      document.querySelector(".led").innerHTML = status;
-
     }
 
 

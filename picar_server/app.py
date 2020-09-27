@@ -60,14 +60,14 @@ def servo_off():
     servoMotor(SERVOPIN, "off")
     return render_template('servo_off.html')
 
-@app.route('/led_on')
-def led_on():
-    led(LEDPINS, True)
+@app.route('/led_on/<int:id>')
+def led_on(id):
+    led(LEDPINS, True, id)
     return render_template('led_on.html')
 
 @app.route('/led_off')
 def led_off():
-    led(LEDPINS, False)
+    led(LEDPINS, False, -1)
     return render_template('led_off.html')
 
 if __name__ == '__main__':

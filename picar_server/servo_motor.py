@@ -16,4 +16,4 @@ def servoMotor(servoPIN, status):
     time.sleep(2)
 
     pwm.stop()
-    GPIO.cleanup()
+    GPIO.cleanup(servoPIN)

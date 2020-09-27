@@ -1,54 +1,30 @@
 import RPi.GPIO as GPIO
 import time
 
-def led(PINS, status):
+def led(PINS, status, RGBNUM):
+    RGBs = (
+        (1,1,1),
+        (1,0,0),
+        (0,1,0),
+        (0,0,1),
+        (0,1,1),
+        (1,0,1),
+        (1,1,0),
+    )
+
+    GPIO.setmode(GPIO.BOARD)
+
+    GPIO.setup(PINS[0], GPIO.OUT)
+    GPIO.setup(PINS[1], GPIO.OUT)
+    GPIO.setup(PINS[2], GPIO.OUT)
+
     if status == True:
-        while(True):
-            GPIO.setmode(GPIO.BOARD)
-        
-            GPIO.setup(PINS[0], GPIO.OUT)
-            GPIO.setup(PINS[1], GPIO.OUT)
-            GPIO.setup(PINS[2], GPIO.OUT)
-
-            red = GPIO.PWM(PINS[0], 100)
-            green = GPIO.PWM(PINS[1], 100)
-            blue = GPIO.PWM(PINS[2], 100)
-            
-            red.start(0)
-            green.start(0)
-            blue.start(0)
-
-            red.ChangeDutyCycle(100)
-            green.ChangeDutyCycle(100)
-            blue.ChangeDutyCycle(100)
-            time.sleep(1)
-
-            red.stop()
-            green.stop()
-            blue.stop()
-
-            GPIO.cleanup()
+        GPIO.output(PINS[0], RGBs[RGBNUM][0])
+        GPIO.output(PINS[1], RGBs[RGBNUM][1])
+        GPIO.output(PINS[2], RGBs[RGBNUM][2])
 
     else:
-        GPIO.setmode(GPIO.BOARD)
-
-        GPIO.setup(PINS[0], GPIO.OUT)
-        GPIO.setup(PINS[1], GPIO.OUT)
-        GPIO.setup(PINS[2], GPIO.OUT)
-
-        red = GPIO.PWM(PINS[0], 1)
-        green = GPIO.PWM(PINS[1], 1)
-        blue = GPIO.PWM(PINS[2], 1)
-            
-        red.start(0)
-        green.start(0)
-        blue.start(0)
-
-        red.stop()
-        green.stop()
-        blue.stop()
-
-        GPIO.cleanup()
+        GPIO.cleanup(PINS)
 
     '''
     if status == True:
