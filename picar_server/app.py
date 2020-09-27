@@ -1,6 +1,6 @@
 import RPi.GPIO as gpio
 import time
-from flask import Flask, render_template, Response
+from flask import Flask, render_template, Response, jsonify
 from camera_pi import Camera
 from dc_motor import DCMotorInterval
 from dc_motor import DCMotor
@@ -10,7 +10,7 @@ from led import led
 DC = DCMotor((7, 11, 13, 15)) # gpio pins
 DCInterval = DCMotorInterval((7, 11, 13, 15), 0.1) # gpio pins, time.sleep(ms)
 SERVOPIN = 16 # servo_motor_gpio_pins
-LEDPIN = 18
+LEDPINS = (18,19,21)
 
 app = Flask(__name__)
 
@@ -62,12 +62,12 @@ def servo_off():
 
 @app.route('/led_on')
 def led_on():
-    led(LEDPIN, True)
+    led(LEDPINS, True)
     return render_template('led_on.html')
 
 @app.route('/led_off')
 def led_off():
-    led(LEDPIN, False)
+    led(LEDPINS, False)
     return render_template('led_off.html')
 
 if __name__ == '__main__':

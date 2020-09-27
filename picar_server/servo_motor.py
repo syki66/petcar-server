@@ -11,9 +11,9 @@ def servoMotor(servoPIN, status):
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(servoPIN, GPIO.OUT)
     pwm=GPIO.PWM(servoPIN, 50)
-    
+
     pwm.start(c)
-    time.sleep(1)
+    time.sleep(2)
 
     pwm.stop()
     GPIO.cleanup()
