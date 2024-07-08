@@ -28,4 +28,4 @@ python app.py
 
 ## 참고자료
 
-- [라즈베리파이를 이용하여 서버 기반 자동차 제작하기](https://blog.syki66.com/2020/09/13/picar)
+- [원격 제어 가능한 라즈베리파이 자동차 제작하기](https://blog.syki66.com/2020/10/08/picar)
